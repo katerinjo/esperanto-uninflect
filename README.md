@@ -12,6 +12,9 @@ Uninflect Esperanto words found in the wild to their dictionary forms for easy l
 - "hejmen" -> "hejme"
 - "amis" -> "ami"
 
-The unofficial genetive case is also handled.
+Unofficial words and affixes are also handled.
 
-- "patricxes" -> "patricxo"
+- "patriĉes" -> "patriĉo"
+- "naj" -> "na"
+- "rian" -> "ri"
+- "alies" -> "alies"
