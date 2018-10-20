@@ -6,11 +6,11 @@
     "ĉirkaŭ" "ĉe" "antaŭ" "post" "sub" "apud" "inter" "preter" "de" "per" "malgraŭ" "dum" "krom" "pro"
     "por" "el" "en" "sur" "ekster" "super" "po" "plus" "ekde" "ol" "tra" "ĝis" "al" "malkiel" "kun"
     "sen" "laŭ" "anstataŭ" "kia" "kial" "kiam" "kie" "kien" "kiel" "kies" "kio" "kiom" "kiu" "tia"
-    "tial" "tiam" "tie" "tien" "tiel" "ties" "tio" "tiom" "tiu" "ia" "ial" "iam" "ie" "ien" "iel"
-    "ies" "io" "iom" "iu" "ĉia" "ĉial" "ĉiam" "ĉie" "ĉien" "ĉiel" "ĉies" "ĉio" "ĉiom" "ĉiu" "nenia"
-    "nenial" "neniam" "nenie" "nenien" "neniel" "nenies" "nenio" "neniom" "neniu" "ajn" "ĉi" "pli"
-    "plej" "ja" "kaj/aŭ" "bis" "ju" "des" "kion" "tion" "ĉion" "nenion" "kiun" "tiun" "ĉiun"
-    "neniun" "alio" "aliu" "alies" "aliam" "alial" "alie" "alien"})
+    "tial" "tiam" "tie" "tiel" "ties" "tio" "tiom" "tiu" "ia" "ial" "iam" "ie" "iel"
+    "ies" "io" "iom" "iu" "ĉia" "ĉial" "ĉiam" "ĉie" "ĉiel" "ĉies" "ĉio" "ĉiom" "ĉiu" "nenia"
+    "nenial" "neniam" "nenie" "neniel" "nenies" "nenio" "neniom" "neniu" "ajn" "ĉi" "pli"
+    "plej" "ja" "kaj/aŭ" "bis" "ju" "des"
+    "alio" "aliu" "alies" "aliam" "alial" "alie"})
 
 (def pronouns
   {"mi" "mi"
@@ -129,6 +129,11 @@
   [word]
   (to-base word #"(\w+)en?" "e"))
 
+(defn reduce-pseudonoun
+  ""
+  [word]
+  (to-base word #"(\w+)(u|uj|un|ujn)" "u"))
+
 (defn uninflect
   "reduce an Esperanto word to its dictionary form"
   [raw]
@@ -138,6 +143,7 @@
       (get pronouns word)
       (reduce-verb word)
       (reduce-noun word)
+      (reduce-pseudonoun word)
       (reduce-adjective word)
       (reduce-adverb word)
       word)))
