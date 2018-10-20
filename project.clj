@@ -3,4 +3,5 @@
   :url "http://example.com/FIXME"
   :license {:name "MIT"
             :url "https://opensource.org/licenses/MIT"}
-  :dependencies [[org.clojure/clojure "1.8.0"]])
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [proto-repl "0.3.1"]])

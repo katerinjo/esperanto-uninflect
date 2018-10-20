@@ -1,7 +1,8 @@
-(ns espo-uninflect.core)
+(ns espo-uninflect.core
+  (:require [clojure.string :as str]))
 
 (def irregulars
-  #{"la" "l'" "ne" "kaj" "aŭ" "kaŭ" "sed" "jes" "ĉu" "pri" "super" "trans" "post" "kontraŭ" "inter"
+  #{"la" "l'" "ne" "kaj" "aŭ" "kaŭ" "sed" "jes" "ĉu" "pri" "trans" "kontraŭ"
     "ĉirkaŭ" "ĉe" "antaŭ" "post" "sub" "apud" "inter" "preter" "de" "per" "malgraŭ" "dum" "krom" "pro"
     "por" "el" "en" "sur" "ekster" "super" "po" "plus" "ekde" "ol" "tra" "ĝis" "al" "malkiel" "kun"
     "sen" "laŭ" "anstataŭ" "kia" "kial" "kiam" "kie" "kien" "kiel" "kies" "kio" "kiom" "kiu" "tia"
@@ -96,10 +97,10 @@
     (clojure.string/replace #"sx" "ŝ")
     (clojure.string/replace #"ux" "ŭ")))
 
-(defn format
+(defn tame
   "make a word lowercase and convert Esperanto x digraphs to unicode single letters"
   [raw]
-  (-> raw lower-case lower-x-system-convert))
+  (-> raw str/lower-case lower-x-system-convert))
 
 (defn to-base
   "reduce word to base form by using regex to find the word's root (the first group)"
@@ -116,7 +117,12 @@
 (defn reduce-noun
   "if the given lowercase word is a noun, return the dictionary form, else return nil"
   [word]
-  (to-base word #"(\w+)(o|oj|on|ojn)" "o"))
+  (to-base word #"(\w+)(o|oj|on|ojn|es)" "o"))
+
+(defn reduce-adjective
+  ""
+  [word]
+  (to-base word #"(\w+)(a|aj|an|ajn)" "a"))
 
 (defn reduce-adverb
   "if the given lowercase word is an adverb, return dictionary form, else nil"
@@ -126,11 +132,12 @@
 (defn uninflect
   "reduce an Esperanto word to its dictionary form"
   [raw]
-  (let [word (format raw)]
+  (let [word (tame raw)]
     (or
       (when (contains? irregulars word) word)
       (get pronouns word)
       (reduce-verb word)
       (reduce-noun word)
+      (reduce-adjective word)
       (reduce-adverb word)
       word)))

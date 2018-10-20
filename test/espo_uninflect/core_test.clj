@@ -2,17 +2,17 @@
   (:require [clojure.test :refer :all]
             [espo-uninflect.core :refer :all]))
 
-(deftest nouns
+(deftest test-nouns
   (testing "nouns: singular, plural, accusative, both, and the unofficial genitive"
     (is
       (and
         (= "ĥoro " (uninflect "ĥoro"))
-        (= "no" (uninflect "noj")
-         (= "aero" (uninflect "aeron"))
-         (= "bordo" (uninflect "bordojn"))
-         (= "cigaredo" (uninflect "cigaredes")))))))
+        (= "no" (uninflect "noj"))
+        (= "aero" (uninflect "aeron"))
+        (= "bordo" (uninflect "bordojn"))
+        (= "cigaredo" (uninflect "cigaredes"))))))
 
-(deftest adjectives
+(deftest test-adjectives
   (testing "adjectives: singular, plural, accusative, and both"
     (is
       (and
@@ -22,14 +22,14 @@
         (= "gaja" (uninflect "gajajn"))
         (= "ĝusta" (uninflect "gxusta"))))))
 
-(deftest adverbs
+(deftest test-adverbs
   (testing "adverbs: normal, directional"
     (is
       (and
         (= "hejme" (uninflect "hejmen"))
         (= "denove" (uninflect "denove"))))))
 
-(deftest verbs
+(deftest test-verbs
   (testing "verbs: infinitive, past, present, future, subjunctive, imperative"
     (is
       (and
@@ -40,7 +40,7 @@
         (= "zorgi" (uninflect "zorgu"))
         (= "helpi" (uninflect "helpus"))))))
 
-(deftest correlatives
+(deftest test-correlatives
   (testing "correlatives: standard, but also the ali- series"
     (is
       (and
@@ -50,7 +50,7 @@
         (= "nenie" (uninflect "nenien"))
         (= "aliel" (uninflect "aliel"))))))
 
-(deftest pronouns
+(deftest test-pronouns
   (testing "pronouns: plain, possessive, possessive plural, possessive acc, and possessive both"
     (is
       (and
@@ -60,7 +60,7 @@
         (= "ri" (uninflect "ri"))
         (= "onia" (uninflect "onian"))))))
 
-(deftest particles
+(deftest test-particles
   (testing "particles: prepositions et cetera"
     (is
       (and
