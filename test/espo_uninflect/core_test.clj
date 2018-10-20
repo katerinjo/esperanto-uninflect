@@ -6,7 +6,7 @@
   (testing "nouns: singular, plural, accusative, both, and the unofficial genitive"
     (is
       (and
-        (= "ĥoro " (uninflect "ĥoro"))
+        (= "ĥoro" (uninflect "ĥoro"))
         (= "no" (uninflect "noj"))
         (= "aero" (uninflect "aeron"))
         (= "bordo" (uninflect "bordojn"))
